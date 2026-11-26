@@ -2464,3 +2464,13 @@ CREATE TABLE opm.reference (
   name VARCHAR(128) NOT NULL ,
   content TEXT NULL ,
   PRIMARY KEY (id) );
+
+-- -----------------------------------------------------
+-- Indexes for the lockbox import in BatchProcessingJob.
+-- OPM.BatchMainframeImportInsert, OPM.BatchInputBankPayments and
+-- OPM.BatchCollateNewPayments run one lookup per file line; without these
+-- each lookup scans the whole table.
+-- -----------------------------------------------------
+CREATE INDEX mainframe_import_audit_batch_record_idx ON opm.mainframe_import (audit_batch_id, record_string);
+CREATE INDEX mainframe_import_pay_transaction_key_idx ON opm.mainframe_import (pay_transaction_key);
+CREATE INDEX payment_transaction_duplicate_check_idx ON opm.payment_transaction (scm_claim_number, pay_trans_batch_number, pay_trans_block_number, pay_trans_sequence_number);
