@@ -420,6 +420,11 @@
              src="${src.dir}/sql/functions.sql" classpathref="buildpath" keepformat="true" delimiter="lineEnding" delimitertype="row" escapeprocessing="false"/>
     </target>
 
+    <target name="db-add-lockbox-import-indexes" description="adds the lockbox import indexes to an existing database">
+        <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" 
+             src="${src.dir}/sql/add-lockbox-import-indexes.sql" classpathref="buildpath"/>
+    </target>
+
     <target name="db-drop" description="drops the tables and sequences">
 
         <sql driver="${db.driver}" password="${db.pass}" url="${db.url}" userid="${db.user}" 
